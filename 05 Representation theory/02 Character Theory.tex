@@ -1,0 +1,161 @@
+
+
+
+\input{../preamble}
+\DeclareMathOperator{\Ce}{Re}
+
+
+
+\begin{document}
+\title{Crash Course on Representation Theory - Day 2}
+\author{Apurva Nakade}
+\thispagestyle{fancy}
+\maketitle
+
+
+
+Character theory is the part of representation theory that allows one to determine the `prime' decomposition of representations.
+
+\section{Character Theory}
+Given a linear transformation $A \in GL(V)$ we can define the trace of $A$ to be the sum of diagonal entries of $A$ in any basis, recall that the trace does not depend upon the choice of any basis. For a representation $\rho$ we can post-compose with the trace map, the resulting function is called the \textbf{character} of the representation.
+\begin{align}
+	\chi_{\rho}: G \xrightarrow{\rho} GL(V) \xrightarrow{\mathrm{trace}} \C
+\end{align}
+The trace is a single number associated to a matrix and hence contains very little information about the matrix, but as it turns out, the character of a representation (which is a function $G \rightarrow \C$) contains enough information to differentiate between representations. We say that the character is a complete invariant of representations.
+
+
+\subsection{Orthogonality relations}
+We can use characters to define a hermitian inner product on the space of representations! For representations $\rho_1, \rho_2$ define an inner product and norm as
+\begin{align}
+	\innerp{\rho_1}{\rho_2} & = \dfrac{1}{|G|} \sum \limits _ {g \in G} {\chi_{\rho_1}(g)} \conj{\chi_{\rho_2}(g)} \\
+	\norm{\rho_1}^2         & = \innerp{\rho_1}{\rho_1}
+\end{align}
+
+The following is an EXTREMELY useful theorem in character theory (which requires nothing more than linear algebra to prove).
+\begin{thm}[Orthogonality relations] $\:$
+	Let $\rho_1, \rho_2, \ldots, \rho_d$ be the distinct irreducible representations of $G$. If $\rho$ is an arbitrary representation which has a decomposition $\sigma = \rho_1^{k_1} \oplus \rho_2^{k_2} \oplus \cdots \oplus \rho_d^{k_d} $ then
+	\begin{align}
+		\innerp{\rho_i}{\sigma} & = k_i
+	\end{align}
+	In particular, we have $\norm{\chi_{\rho_i}} = 1$ for all $i$ and $\innerp{\chi_{\rho_1}}{\chi_{\rho_2}} = 0$ for $i \neq j$.
+\end{thm}
+
+\subsection{Character Tables}
+By the cyclicity of trace we have
+\begin{align*}
+	\chi_\rho(h^{-1}gh) = \mathrm{trace}(\rho(h)^{-1} \rho(g) \rho(h)) = \mathrm{trace}(\rho(h)\rho(h)^{-1} \rho(g)) = \mathrm{trace}(\rho(g)) = \chi_\rho(g)
+\end{align*}
+and so to determine the character of a representation it is enough to determine the character of one element in each conjugacy class. Such information is typically organized in a table called the \textbf{character table}. The character tables from the examples from yesterday's notes are as follows.
+
+\begin{align*}
+	\mbox{
+	\begin{tabular}{r|ccc}
+	$\Z/3$      & \{0\}     & \{1\}                              & \{2\}                                \\
+	\hline
+	            & 1         & 1                                  & 1                                    \\
+	            & 1         & $\omega$                           & $\omega^2$                           \\
+	            & 1         & $\omega^2$                         & $\omega$
+	\end{tabular}
+	}
+	&\qquad \qquad
+	\mbox{
+	\begin{tabular}{r|ccc}
+	$S_3(=D_6)$ & $\{(1)\}$ & $\{(1 \: 2); (2 \: 3); (1 \: 3)\}$ & $\{ (1 \: 2 \: 3); (1 \: 3 \: 2) \}$ \\
+	\hline
+	trivial     & 1         & 1                                  & 1                                    \\
+	sign        & 1         & -1                                 & 1                                    \\
+	2-dim       & 1         & 0                                  & $2\cos(2 \pi / 3)$
+	\end{tabular}
+	}
+\end{align*}
+
+\begin{center}
+
+\end{center}
+
+\begin{center}
+
+\end{center}
+
+\begin{center}
+	\begin{table}[H]
+		\begin{center}
+			\begin{tabular}{r|ccccc}
+				$Q_8$             & $\{ 1 \}$ & $\{ -1 \}$ & $\{ i, -i \}$ & $\{ j, -j \}$ & $\{ k, -k \}$ \\	\hline
+				trivial           & 1         & 1          & 1             & 1             & 1             \\
+				$\mathrm{sign}_i$ & 1         & 1          & 1             & -1            & -1            \\
+				$\mathrm{sign}_j$ & 1         & 1          & -1            & 1             & -1            \\
+				$\mathrm{sign}_k$ & 1         & 1          & -1            & -1            & 1             \\
+				2-dim             & 2         & -2         & 0             & 0             & 0
+			\end{tabular}
+		\end{center}
+	\end{table}
+\end{center}
+
+
+\section{Frobenius determinant}
+The Frobenius determinant can be easily computed using linear algebra. We'll do it using representation theory, this is completely unnecessary.
+
+
+The first thing to observe is that the Frobenius matrix $F_n$ is constructed out of the regular representation for the group $\Z/n$. Consider the $n$ dimensional vector space with basis $e_0, e_1, \ldots, e_{n-1}$ on which $\Z/n$ acts as:
+\begin{align}
+	\rho(k)(e_j) & = e_{(k+j \mod n)}
+\end{align}
+The $j^{th}$ column of the matrix $\rho(k)$ has the 1 in the $(k+j \mod n)^{th}$ place and 0 everywhere else. This is exactly the place where the $x_k's$ occur in the Frobenius matrix!!! Hence we get the identity
+\begin{align}
+	\label{eq:eq1}
+	F_n = \sum \limits_{k=0}^n x_k \rho(k) = \sum \limits_{k=0}^n x_k \rho(1)^k
+\end{align}
+For $0 \le l < n$ let $\rho_l$ be the 1 dimensional irreducible representations of $\Z/n$ with $\rho_l(1) = \omega^l$ where $\omega = e^{2 \pi i /n}$. For some constants $c_i$ we must have
+\begin{align}
+	\rho = \rho_0 ^ {c_0} \oplus \cdots \oplus \rho_{n-1} ^ {c_{n-1}}
+\end{align}
+To compute $c_l$ we compute the inner product $c_l = \innerp{\rho_l}{\rho}=\sum \limits _ {k \in \Z/n} {\chi_{\rho_l}(k)} \conj{\chi_{\rho}(k)}/n$. The matrices $\rho(k)$ have all the diagonal entries 0 except for $k = 0$ which has all the diagonal entries 1 and hence $\chi_\rho(k) = \begin{cases} n \mbox{ if k = 0} \\ 0 \mbox{ otherwise} \end{cases}$ so that $c_l = 1$ for all $l$ and we get
+\begin{align}
+	\rho = \rho_0 \oplus \rho_1 \oplus \cdots \oplus \rho_{n-1}
+\end{align}
+We can choose a basis such that the matrix $\rho(1)$ is a diagonal matrix with entries $\rho_l(1) = \omega^l$, plugging in \eqref{eq:eq1}
+\begin{align}
+	F_n = \sum \limits_{k=0}^n \begin{bmatrix} x_k &   &   &   \\ &  \omega^k x_k & & \\ & & \ddots & \\ & & & \omega^{(n-1)k} x_k & \end{bmatrix}
+	&=
+	\begin{bmatrix} \sum \limits_{k=0}^n x_k       &   &   &   \\ & \sum \limits_{k=0}^n \omega^k x_k & & \\ & & \ddots & \\ & & & \sum \limits_{k=0}^n \omega^{(n-1)k}x_k & \end{bmatrix} \\
+	\implies \det F_n	= \prod \limits_{l=0}^{n-1} \sum \limits_{k=0}^n \omega^{kl} x_k &= \prod \limits_{l=0}^{n-1}\left(x_0 + \omega^{l} x_1 + \cdots + \omega^{(n-1)l}x_{n-1}\right)
+\end{align}
+\begin{flushright}
+	$\qed$
+\end{flushright}
+This naturally leads to the following question.
+\begin{ques}
+	Consider the Frobenius matrix $F_G$ whose entries are obtained from the multiplication table for $G$ i.e. the rows and columns are indexed by the entries of $G$ and the $g,h^{th}$ entry is $x_{gh^{-1}}$. What is $\det F_G$?
+\end{ques}
+The above proof generalizes directly to an arbitrary group and the determinant can be computed in terms of the regular representation of $G$ and the irreducible representations of $G$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\iffalse
+\subsection{Standard representation of $S_n$}
+As we saw earlier the standard representation of $S_n$ breaks down into two representations $W \oplus W^{\perp}$ where $W$ is the 1 dimensional vectors space spanned by $e_1 + \cdots + e_n$ and $W^{\perp}$ is the perpendicular vector space consisting of vectors of the form $\{ c_1 e_1 + \cdots + c_n e_n : c_1 + \cdots + c_n = 0\}$
+As we saw earlier the standard representation of $S_n$ breaks down into two representations $W \oplus W^{\perp}$ where $W$ is the 1 dimensional vectors space spanned by $e_1 + \cdots + e_n$ and $W^{\perp}$ is the perpendicular vector space consisting of vectors of the form $\{ c_1 e_1 + \cdots + c_n e_n : c_1 + \cdots + c_n = 0\}$
+\begin{proposition}
+	\begin{align}
+		\dfrac{1}{n!}\sum\limits_{\sigma \in S_n} (\mbox{number of fixed points of } \sigma)^2 = 2
+	\end{align}
+\end{proposition}
+\fi
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,274 @@
+\iffalse
+Noether's theorem says that continuous symmetries of physical systems gives rise to conservation laws. In this class we'll see some examples of low dimensional Lie groups and how they give rise to various phenomenon in physics like time dilation and length contraction in special relativity, spin states of electrons.
+
+Keywords: bilinear forms, signature, SO(2), SO(3), Spin, SO(1,3), Minkowski space and relativity, Noether's theorem, Lie groups.
+
+Prereqs: Linear algebra, Group theory
+Homework: Recommended
+\fi
+
+
+\input{../preamble}
+
+\DeclareMathOperator{\aut}{Aut}
+
+\begin{document}
+\title{Linear Groups}
+\author{Apurva Nakade}
+\thispagestyle{fancy}
+\maketitle
+
+
+
+Any mathematical object naturally defines a group $\aut(X)$, the group of \textbf{automorphisms} or symmetries of $X$ which are maps $X \rightarrow X$ preserving {some structure} on $X$. Our main examples for $X$ will be vector spaces over $\R$ or $\C$ (with  additional structures) in which case the automorphisms groups are called \textbf{linear groups}. We'll make the structures successively more rigid thereby specializing to smaller and smaller linear groups.
+
+
+
+
+
+
+\section*{Symmetries of $\R^1$}
+Symmetries of $\R^1$ are transformations $f: \R^1 \rightarrow \R^1$ which preserve some structure. The simplest structure $\R^1$ has is that of a set. The symmetries of $\R^1$ thought of as a set are bijective maps $f: \R^1 \rightarrow \R^1$. This group is too big and lacks any interesting structure. $\R^1$ is also a topological space. Symmetries of the topological space $\R^1$ are continuous maps $f:\R^1 \rightarrow \R^1$ which are isomorphisms.
+
+From an algebraic point of view $\R^1$ is a vector space over $\R$. Symmetries of the vector space $\R^1$ are linear transformations $f:\R^1 \rightarrow \R^1$ which are isomorphisms. A linear transformation $f$ is simply multiplication by a scalar $c \in \R$ and such a transformation is an isomorphism if $c \neq 0$. So the set of symmetries of the vector space $\R^1$ is isomorphic to the group of non-zero reals $\R^{\times}$. This group is usually denoted by $GL_1(\R)$.
+
+Inside $\R^{\times}$ is the subgroup of positive reals $\R _ {> 0}$. These are the orientation preserving transformations of $\R^1$ (see Section \ref{sec:orientation}). Another structure that $\R^1$ has is that of distance. Multiplication by a scalar $c$ preserves distances iff $c = \pm 1$, and the set $\{ -1, +1 \}$ is isomorphic to $\Z/2$. Finally only the identity map preserves both the orientation and the inner product and so the corresponding automorphism group is trivial.
+
+\begin{center}
+	\begin{tabular}{ll}
+		Structures on $\R^1$ & Automorphism Groups   \\\hline
+		Set                  & Bijections            \\
+		Topological space    & Continuous bijections \\
+		Vector space         & $\R^{\times}$         \\
+		Orientation          & $\R_{>0}$             \\
+		Metric               & $\Z/2$                \\
+		Orientation + Metric & trivial group
+	\end{tabular}
+\end{center}
+
+
+
+
+\section{General linear groups}
+
+Denote the set of $n \times n$ matrices with entries in $\R$ (resp. $\C$) by $M_{n \times n}(\R)$ (resp. $M_{n \times n}(\C)$).
+
+For the vector space $\R^n$ the automorphism group is called the \textbf{general linear group} $GL_n(\R)$ i.e. $GL_n(\R)$ is the group of invertible $n \times n$ matrices with real entries. Consider an $n \times n$ matrix $A \in GL_n(\R)$ and let $e_1, e_2, \ldots , e_n$ be the columns of $A$. Because $M$ is invertible $e_1, e_2, \ldots , e_n$ form a basis for $\R^n$. Conversely any basis $e_1, e_2, \ldots , e_n$ gives an $n \times n$ invertible matrix.
+\begin{align}
+	GL_n(\R)
+	  & = \{ n \times n \mbox{ invertible matrices with entries in } \R \}             \\
+	  & = \{ A \in M_{n \times n}(\R) : \det A \neq 0\}                                \\
+	  & = \{ (e_1 , e_2 , \cdots , e_n) : (e_i)_{i=1}^n \mbox{ is a basis for } \R^n\}
+\end{align}
+
+
+
+
+
+
+
+\section{Orientation}
+\label{sec:orientation}
+The determinant of an invertible matrix is non-zero. Further the determinant satisfies the property that for two $n\times n$ matrices $A$, $B$ we have $\det (AB) = \det A \cdot \det B$. Hence we have a group homomorphism
+\begin{align}
+	\det : GL_n(\R) \rightarrow \R^{\times}
+\end{align}
+The preimage of positive reals $\R_{>0}$ under this map is denoted by $GL_n^+(\R) := \det^{-1}(\R_{>0})$. It is easy to see that this is a subgroup of $GL_n(\R)$. We can decompose $GL_n(\R)$ into cosets
+\begin{align}
+	GL_n(\R) = {\det} ^{-1}(\R_{>0}) \sqcup {\det} ^{-1}(\R_{<0})
+\end{align}
+This breaks up the set of all bases of $\R^n$ into two. These are called the \textbf{orientation classes} of bases of $\R^n$. The bases in the orientation class containing the standard basis are said to have the \textbf{standard orientation} and the bases which are not in this orientation class are said to have the \textbf{reverse orientation}.
+
+The matrices in $GL_n^+(\R)$ are called \textbf{orientation preserving} matrices. In the language of automorphisms $GL_n^+(\R)$ is the automorphism group of $\R^n$ with a chosen orientation class.
+
+
+
+
+
+
+
+\section{Special linear groups}
+
+Sitting inside $GL_n(\R)$ is the subgroup of $n\times n$ matrices with determinant 1 denoted by $SL_n(\R)$, called the \textbf{special linear group}.
+\begin{align}
+	SL_n(\R) = \{ A \in M_{n \times n}(\R) : \det A = 1 \}
+\end{align}
+We can realize $SL_n(\R)$ as volume preserving automorphisms of $\R^n$ i.e. if $A \in SL_n(\R)$ and $X$ is a subset of $\R^n$ then the volume of $X$ is the same as the volume of $AX$. This is because if $X$ is a `parallelogram' in $\R^n$ then the volume of $X$ is exactly the absolute value of the determinant of $X$, and any other shape can be approximated by `parallelograms'.
+
+The converse is almost true. A volume preserving automorphism of $\R^n$ should have determinant $\pm 1$, hence $SL_n(\R)$ is the group of automorphism of $\R^n$ which preserve both {volume} and {orientation}.
+
+
+
+
+
+
+
+
+\section{Orthogonal groups}
+On $\R^n$ we have the natural notion of distance and we can look at linear autmorphisms of $\R^n$ which preserve distances. We know from Euclidean geometry that any transformation that preserves distances also preserves angles. Angles and lengths in $\R^n$ can be measured using the dot product, this turns out to be the structure that is easiest to manipulate.
+
+Denote by $(\cdot)$ the standard dot product between vectors in $\R^n$ defined as: for $ x = [x_1, x_2, \cdots, x_n]^T$ and $ y = [y_1, y_2, \cdots, y_n]^T$ the dot product is
+\begin{align}
+	x \cdot  y := \sum \limits _{i=1}^n x_i y_i =  x ^ T  y
+\end{align}
+Recall that the length of the vectors is given by $\norm{ x}^2 = { x.  x}$ and we can \emph{define} the angle between the vectors $ x$ and $ y$ by $\theta := \cos^{-1}\dfrac{ x \cdot  y}{\norm { x} \norm{ y}}$. The group of linear transformations of $\R^n$ which preserve the standard dot product is called the \textbf{orthogonal group} denoted $O(n)$.
+\begin{align}
+	O(n) := \{ A : \R^n \rightarrow \R^n : \innerp{A  x}{A  y} = \innerp{ x}{ y} \mbox{ for all }  x,  y \in \R^n\}
+\end{align}
+
+We can simplify the condition $\innerp{M  x}{A  y} = \innerp{ x}{ y}$ as follows:
+\begin{alignat}{4}
+	  &   & \innerp{M  x}{M  y}
+	& = \innerp{ x}{ y}   \qquad \qquad\\
+	\Longleftrightarrow \qquad
+	  &   &
+	(A  x)^T (A  y)
+	& =  x ^ T  y         \qquad \qquad\\
+	\Longleftrightarrow  \qquad
+	  &   &
+	x ^ T A^T A y
+	& =  x ^ T  y         \qquad \qquad\\
+	\Longleftrightarrow \qquad
+	  &   &
+	x ^ T (A^T A- I_{n}) y
+	& = 0 \qquad \qquad
+\end{alignat}
+where $I _ {n}$ denotes the identity matrix of size $n \times n$. For an orthogonal matrix $A$ we want this to be true for all $ x,  y \in \R^n$. This is equivalent to requiring $A^T A - I_{n} = 0$ (Exercise \ref{thm:linAlgProb}) which gives an alternate definition of $O(n)$.
+
+For an orthogonal matrix $A \in O(n)$ if $e_1, e_2, \cdots, e_n$ are the columns of $A$ then $e_i \cdot e_j = 0$ if $i \neq j$ and $e_i \cdot e_i = 1$, such a basis is called an \textbf{orthonormal basis} of $\R^n$.
+
+\begin{align}
+	O(n)
+	  & = \{ A \in M_{n \times n}(\R) : \mbox{ for all } x, y \in \R^n \mbox{ we have }\innerp{x}{y} = \innerp{Ax}{Ay}	\} \\
+	  & = \{ A \in M_{n \times n}(\R) : A^T A = I_{n}\}                                                                   \\
+	  & = \{ (e_1 , e_2 , \cdots , e_n) : (e_i)_{i=1}^n \mbox{ is an orthonormal basis for } \R^n\}
+\end{align}
+
+\subsection{Special orthogonal groups}
+The intersection $O(n) \cap GL_n^+(\R)$ is called the \textbf{special orthogonal group} denoted $SO(n)$, these are the matrices which preserve the standard inner product and orientation. As we'll see later for small positive integers $n$ the groups $SO(n)$ have nice descriptions.
+
+
+
+
+
+
+
+\section{Complex matrix groups}
+Everything that we did above can be generalized for vector spaces over complex numbers. We have natural generalizations of the vector spaces $GL_n(\C)$ and $SL_n(\C)$.
+
+The generalization of $O(n)$ on the other hand needs a little tweaking. On complex vector spaces instead of a regular inner product $(.)$ we have a \textbf{hermitian inner product} defined by
+\begin{align}
+	\innerp{ x}{ y} & = \conj{x_1}{y_1} + \conj{x_2}{y_2} + \cdots + \conj{x_n}{y_n}
+\end{align}
+Matrices which preserve this structure are called \textbf{unitary matrices} and the columns of these form an orthonormal basis under the hermitian inner product.
+\begin{align}
+	U(n)
+	  & = \{ A \in M_{n \times n}(\C) : \mbox{ for all } x, y \in \C^n \mbox{ we have }\innerp{x}{y} = \innerp{Ax}{Ay}	\} \\
+	  & = \{ A \in M_{n \times n}(\C) : A^* A = I_{n}\}                                                                   \\
+	  & = \{ (e_1 , e_2 , \cdots , e_n) : (e_i)_{i=1}^n \mbox{ is an orthonormal basis for } \C^n\}
+\end{align}
+where $A^*$ is the complex conjugate of transpose of $A$. There is also the \textbf{special unitary group} $SU(n)$ defined to be the group of unitary matrices with determinant 1 (see \ref{thm:detProb}).
+
+We have a natural inclusion $\R^n \rightarrow \C^n$ induced by $\R \subseteq \C$. This induces a group homomorphism $\Phi: GL_n(\R) \hookrightarrow GL_n(\C)$. Furthermore the restriction of the standard hermitian bilinear on $\C^n$ to $\R^n$ is the standard inner product which implies that $\Phi^{-1}(U(n)) \cong O(n)$ and $\Phi^{-1}(SU(n)) \cong SO(n)$. There are also maps going in the other direction, see Exercise \\
+
+
+
+
+To summarize we have the following hierarchy of matrices
+\begin{align*}
+	\xymatrix{
+	SO(n) \ar@{^{(}->}[r] \ar@{^{(}->}[dr] & SL(n) \ar@{^{(}->}[r] & GL_n^+(\R) \ar@{^{(}->}[r] & GL_n(\R) \\
+	& O(n) \ar@{^{(}->}[urr]
+	}
+	&&
+	\xymatrix{
+	SU(n) \ar@{^{(}->}[r] & U(n) \ar@{^{(}->}[r] & GL_n(\C)
+	}
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+\section{Exercises}
+
+\begin{exercise}
+	\label{thm:linAlgProb}
+	For $A \in M_{n \times n}(\R)$ show that if $ x^T A  y = 0$ for all vectors $ x,  y \in \R^n$ then $A = 0$.
+\end{exercise}
+
+\begin{exercise}
+	\label{thm:detProb}
+	Find the images of $O(n)$, $SO(n)$, $GL_n(\C)$, $U(n)$ under the determinant map.
+\end{exercise}
+
+\begin{exercise}
+	Does it make sense to define $GL_n^+(\C)$?
+\end{exercise}
+
+\begin{exercise}
+	Identify the following quotients:
+	\begin{enumerate}
+		\item $GL_n(\R)/GL_n^+(\R)$
+		\item $GL_n(\R)/SL_n(\R)$
+		\item $GL^+_n(\R)/SL_n(\R)$
+		\item $O(n)/SO(n)$
+		\item $U(n)/SU(n)$
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	Find the possible eigenvalues for matrices in $O(n)$ and $U(n)$.
+\end{exercise}
+
+\begin{exercise}$\:$
+	\begin{enumerate}
+		\item Because $\C^n$ can be thought of as a vector space over $\R$ of dimension $2n$ and every $\C$ linear transformation is also $\R$ linear, we can define a map $\Psi:GL_{n}(\C) \rightarrow GL_{2n}(\R)$. Explicitly describe the map $\Psi$.
+		\item Is $\Psi$ a group homomorphism?
+		\item Describe the map $\Psi \circ \Phi$.
+	\end{enumerate}
+
+\end{exercise}
+
+\begin{exercise}
+	Is $O(n)$ a normal subgroup of $GL_n(\R)$? Read about the \textbf{QR-decomposition} of matrices and identify the set $GL_n(\R)/O(n)$. What structure(s) does this set have?
+\end{exercise}
+
+\begin{exercise}
+	$M_{n \times n}(\R)$ is naturally isomorphic to $\R^{(n^2)}$, similarly for $\C$, so we can talk about connectedness of its subsets.
+	\begin{enumerate}
+		\item Show that $GL_n(\R)$ and $O(n)$ are not connected.
+		\item Can you think of a way of showing that $GL_n^+(\R)$, $SO(n)$ and $GL_n(\C)$ are connected?
+	\end{enumerate}
+\end{exercise}
+
+
+\end{document}
+
+
+
+\iffalse
+$SO(n)$ is precisely the kernel of the determinant map $\det : O(n) \rightarrow \{ -1, +1\}$ and so we have an isomorphism
+\begin{align}
+	O(n) / SO(n) \cong \Z/2
+\end{align}
+
+\raisebox{10pt}{\dbend} We think of elements of $SO(n)$ as rotations of $\R^n$ and the elements of the coset $O(n) \setminus SO(n)$ as reflections of $\R^n$. When $n>3$ these words do not agree with our standard notion of rotation as there are multiple axes around which rotations can occur independently.
+\fi
+
+
+
+\iffalse
+As $\det A^T = \det A$ for orthogonal matrices $A \in O(n)$ we get
+\begin{align}
+	(\det A )^2 = \det(A^2) & = \det(A^T A) = \det (I_n) = 1 \\
+	\implies \qquad \det A  & = \pm 1
+\end{align}
+This is a very useful property and we will exploit this to understand elements of $O(n)$ later.
+\fi

@@ -1,0 +1,107 @@
+\iffalse
+It's unfair to say that mathematicians aren't real doctors, we perform surgeries all the time. In this class we'll introduce the notion of a topological manifold via simplicial (delta) complexes. Spend a day or two doing examples and go over several notions like orientation, cobordism and of course surgery.
+
+Keywords: simplicial complex, manifold, orientation, cobordism, surgery
+
+Type: Lecture
+Homework: Recommended
+Prereqs: None
+\fi
+
+
+
+\input{../preamble}
+\rhead{\scshape Mathcamp 2017 : All things Manifoldy}
+\begin{document}
+\title{Modular origami}
+\author{Apurva Nakade}
+\thispagestyle{fancy}
+\maketitle
+
+
+\section{Orientation of surfaces}
+Let us start with surfaces. A surface is called orientable if has two sides. A sphere or a torus are easily seen to be orientable. In fact any surface that can be \textit{embedded} in $\R^3$ is orientable. A Mobius strip on the other hand (which is not a surface as it has a boundary) is not orientable. With a little more mental effort one might be able to see that a Klein bottle or a Projective space are not orientable. We want an equivalent definition which can be used on gluing diagrams.
+
+We begin by defining orientation of a polygon. An \textbf{orientation of a polygon} is simply a cyclic ordering of it's vertices. For example this is one of the two possible ways to orient a triangle with vertices $(0,1,2)$.
+
+\begin{center}
+	\begin{tabular}{c}
+		\centering \includegraphics[height=3cm]{../noImageAvailable}
+	\end{tabular}
+\end{center}
+
+\begin{exercise}
+	This is related to the fact that the polygon has two sides via the right hand rule in physics. Do you see the connection?
+\end{exercise}
+
+An \textbf{orientation} of (a gluing diagram of) a surface is a compatible choice of orientation for each triangle, where the orientations of two adjacent triangles need to be compatible in the following way,
+\begin{center}
+	\begin{tabular}{c c c}
+		\centering \includegraphics[height=3cm]{../noImageAvailable} & \: & \centering \includegraphics[height=3cm]{../noImageAvailable}
+	\end{tabular}
+\end{center}
+This forces an edge to be directed in two different directions in adjacent triangles.
+
+\begin{exercise}
+	Add the diagonals to the standard gluing diagrams to obtain triangulations and try to find orientations for them. Conclude that $S^2,T$ are orientable and $\R\P^2,K$ are not.
+\end{exercise}
+
+\begin{exercise}
+	Use gluing diagrams to show that $T\#T$ is orientable. Generalize this to argue that $T ^{\# n}$ are orientable.
+\end{exercise}
+
+This same method also allows us to understand manifolds in higher dimensions as well.
+
+
+
+
+
+
+
+\section{Simplices}
+As we go to higher dimensions polygons (or is it polytopes?) become whacky are themselves quite hard to understand. So instead of looking at arbitrary polygons we look at the simplest polygons: triangles. We'll upgrade the definition of a triangle to a simplex which can live in arbitrary dimensions.
+
+\begin{definition}
+	An $n$ dimensional \textbf{simplex} $\Delta^n$ is any set which is homeomorphic to the following region in $\R^{n}$.
+	\begin{align}
+		\{ (x_0, x_1, \cdots, x_n) : x_0 + \cdots + x_n \le 1 \mbox{ and each } x_i \ge 0  \}
+	\end{align}
+\end{definition}
+A 1 dimensional simplex is a segment and a 2 dimensional simplex is a triangle.
+Simplices are topologists best friend.
+
+Note that by adding extra diagonal lines we could have made the gluing diagrams entirely out of triangles.
+We represent a simplex by its set of vertices.
+
+\begin{figure}[h]
+	\centering \includegraphics{../noImageAvailable}
+	\caption{Gluing diagram with labeled simplices}
+	\label{}
+\end{figure}
+
+As with origami you can glue these simplices any way you want and get relaly interesting objects. We're going to glue them to create manifolds.
+
+\section{Manifolds from simplices}
+A delta complex is a collection of simplices glued along the faces.
+
+\begin{definition}
+	Faces of a simplex followed by examples.
+\end{definition}
+
+\begin{definition}
+	Definition of a delta complex followed by several examples.
+\end{definition}
+
+Talk about spheres, tori and projective spaces in 3 dimensions.
+
+\begin{ques}
+	When is a delta complex a manifold?
+\end{ques}
+
+Examples of manifolds and non-manifolds.
+
+
+
+
+
+\end{document}

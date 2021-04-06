@@ -1,0 +1,293 @@
+\iffalse
+Noether's theorem says that continuous symmetries of physical systems gives rise to conservation laws. In this class we'll see some examples of low dimensional Lie groups and how they give rise to various phenomenon in physics like time dilation and length contraction in special relativity, spin states of electrons.
+
+Keywords: bilinear forms, signature, SO(2), SO(3), Spin, SO(1,3), Minkowski space and relativity, Noether's theorem, Lie groups.
+
+Prereqs: Linear algebra, Group theory
+Homework: Recommended
+\fi
+
+
+\input{../preamble}
+
+
+\begin{document}
+\title{Rotations}
+\author{Apurva Nakade}
+\thispagestyle{fancy}
+\maketitle
+
+
+
+\emph{I did not have time to proof-read these notes, these are likely to have more errors than usual :-/}$\\\\$
+
+Let's start by analyzing the orthogonal group in 2 dimensions $O(2)$.
+\begin{align}
+	O(2)
+	&=
+	\left\{ \begin{bmatrix} a & b \\ c & d \end{bmatrix} : \begin{bmatrix} a & b \\ c & d \end{bmatrix} \begin{bmatrix} a & c \\ b & d \end{bmatrix} = I_2\right\} \\
+	SO(2)
+	&=
+	\left\{ \begin{bmatrix} a & b \\ c & d \end{bmatrix} : \begin{bmatrix} a & b \\ c & d \end{bmatrix} \begin{bmatrix} a & c \\ b & d \end{bmatrix} = I_2, ad-bc = 1 \right\}
+\end{align}
+By a direct computation we can show that every element of $O(2)$ is one of the two forms (Exercise \ref{thm:exO2})
+\begin{align}
+	\label{eq:O2}
+	\begin{bmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{bmatrix}, & \begin{bmatrix} \cos \theta & \sin \theta \\ \sin \theta & -\cos \theta \end{bmatrix}
+\end{align}
+These matrices have determinants $1$ and $-1$ respectively and represent rotations and reflections in $\R^2$. The eigenvalues are of the form $e^{i\theta}, e^{-i\theta}$ for the rotation matrices and $\pm 1$ for the reflection ones and so we get
+
+\begin{proposition}
+	Every matrix in $O(2)$ is either a rotation, in which case it is similar to a matrix of the form $\begin{bmatrix} e^{i\theta} & \\ & e^{-i\theta} \end{bmatrix}$ or a reflection about a line, in which case it is similar to a matrix of the form $\begin{bmatrix} -1 & \\ & 1 \end{bmatrix}$.
+\end{proposition}
+
+
+\section{Orthogonal matrices}
+This method does not generalize to higher dimensions (or does it?) instead we use eigenvalues to analyze the matrices.
+
+\begin{thm}[Spectral theorem]
+	Every matrix in $O(n)$ and $U(n)$ is diagonalizable over the complex numbers.
+\end{thm}
+Recall that diagonalizable means that the matrix is similar to a diagonal matrix i.e. it becomes diagonal after doing some base change. Even though $O(n)$ has real entries it's eigenvalues and eigenvectors might be complex i.e. the eigenvectors can be vectors in $\C^n$ instead of $\R^n$.
+
+Because $O(n) \subseteq U(n)$ it suffices to analyze the eigenvectors of unitary matrices. Let $M \in U(n)$ be a unitary matrix. By the Spectral theorem there exist $n$ eigenvectors $v_1, \ldots, v_n \in \C^n$ with corresponding eigenvalues $\lambda_1, \ldots, \lambda_n$ i.e. $A v_i = \lambda_i v_i$. Using the definition of unitary matrices we must have
+\begin{alignat}{4}
+	               &   & \innerp{Av_i}{Av_i}                         & = \innerp{v_i}{v_i} \\
+	\implies \quad &   & \innerp{\lambda_i v_i}{\lambda_i v_i}       & = \innerp{v_i}{v_i} \\
+	\implies \quad &   & \conj \lambda_i \lambda_i \innerp{v_i}{v_i} & = \innerp{v_i}{v_i} \\
+	\implies \quad &   & \conj \lambda_i \lambda_i                   & = 1
+\end{alignat}
+As $O(n)	\subseteq U(n)$ the same holds for $O(n)$ so we get the following proposition.
+
+\begin{proposition}
+	Every eigenvalue of an unitary or an orthogonal matrix is a complex number of norm 1 and hence is of the form $e^{i \theta}$ for some $\theta$.
+\end{proposition}
+
+
+\subsection{Orthogonal matrices in 3 dimensions}
+Consider a matrix $A \in O(3)$, by the previous section $A$ has 3 eigenvalues of the form $\lambda_1 = e^{i \theta_1}$, $\lambda_2 = e^{i \theta_2}$, $\lambda_3 = e^{i \theta_3}$ for some $\theta_1$, $\theta_2$, $\theta_3$. But $O(3)$ has real entries and hence the complex eigenvalues of $A$ should come in conjugate pairs. The only way this can happen is if $\theta_1 = 0$ or $\pi$ and $\theta_2 = - \theta_3$.
+
+\begin{proposition}
+	For any $A \in O(3)$ the eigenvalues of $A$ are of the form $\lambda_1 = \pm 1 , \lambda_2 = e^{i \theta}, \lambda_3 = e^{-i \theta}$ for some $\theta$. Further $\lambda_1 = 1$ iff $A \in SO(3)$.
+\end{proposition}
+
+If $A \in SO(3)$ then $A$ is similar to
+\begin{align}
+	\label{eq:O3Type1}
+	A \sim \begin{bmatrix} 1 &   &   \\ & e^{i \theta} & \\ & & e^{-i\theta} \end{bmatrix} \sim  \begin{bmatrix} 1 &   &   \\ &\cos \theta & -\sin \theta \\ &\sin \theta & \cos \theta \end{bmatrix}
+\end{align}
+This is saying that any matrix in $SO(3)$ represents rotation around an axis.
+
+If $A \in O(3) \setminus SO(3)$ then $A$ is similar to
+\begin{align}
+	\label{eq:O3Type2}
+	A \sim \begin{bmatrix} -1 &   &   \\ & e^{i \theta} & \\ & & e^{-i\theta} \end{bmatrix} \sim  \begin{bmatrix} -1 &   &   \\ &\cos \theta & -\sin \theta \\ &\sin \theta & \cos \theta \end{bmatrix}
+\end{align}
+This is saying that any matrix in $O(3) \setminus SO(3)$ represents rotation around an axis followed by a reflection along the perpendicular plane.
+
+\begin{proposition}
+	Every linear transformation of $\R^3$ that preserves distances is either a rotation about an axis or a rotation about an axis followed by a rotation about the perpendicular plane.
+\end{proposition}
+
+
+
+
+
+\iffalse
+\section{$SU(2)$}
+The arguments above prove that every unitary matrix is similar to a diagonal matrix with entries of the form $e^{i\theta}$. Since unitary matrices can have entries in complex numbers there are no conditions on the $\theta$'s.
+
+Let us restrict to $n=2$ and consider the matrices in $SU(2)$
+
+\begin{align}
+	SU(2) = \{ A \in M_{2 \times 2}(\R) : A ^* A = I_2, \det A = 1\}
+\end{align}
+
+As we did for $O(2)$ we can explicitly write down the matrices in $SU(2)$. Let $\begin{bmatrix} a & b \\ c & d \end{bmatrix}$ be a matrix in $SU(2)$ then the conditions on $SU(2)$ imply that $d = \conj a$ and $c = -\conj b$ and $\norm{a}^2 + \norm{b}^2 = 1$ i.e.
+\begin{align}
+	SU(2) = \left\{ \begin{bmatrix} a & b \\ -\conj{b} & \conj{a} \end{bmatrix} : a, b \in \C \mbox{ and } \norm{a}^2 + \norm{b}^2 = 1 \right\}
+\end{align}
+Let $a = x_1 + i y_1$ and $b = x_2 + i y_2$. The the condition $\norm{a}^2 + \norm{b}^2 = 1$ is equivalent to $x_1^2 + y_1^2 + x_2^2 + y_2^2 = 1$, but this is exactly the equation of the sphere in $\R^3$.
+
+\begin{thm}
+	As a (topological) space $SU(2)$ is isomorphic to $S^3$.
+\end{thm}
+Note that this implies that every point in $S^3$ gives rise to a unitary transformation of $\C^2$.
+\fi
+
+
+
+\section{Quaternions}
+There is another way to talk about rotations, using quaternions! Recall that \textbf{quaternions} form a non-abelian group, denoted $\mathbb{H}$, that is isomorphic as a set to $\R^4$. Elements of $\mathbb{H}$ are of the form $a + bi + cj + dk$ and satisfy the relations
+\begin{align}
+	i^2 = j^2 = k^2 = -1, ij = k, jk = i, ki = j
+\end{align}
+
+\iffalse
+
+Similar to complex numbers we have conjugation and norm on quaternions given by
+\begin{align}
+	\norm{a + bi + cj + dk}^2 & = a^2 + b^2 + c^2 + d^2 \\
+	\conj{a + bi + cj + dk}   & = a - bi - cj - dk
+\end{align}
+and we also have the identity
+\begin{align}
+	(a + bi + cj + dk).\conj{(a + bi + cj + dk)} = \norm{a + bi + cj + dk}^2
+\end{align}
+In particular note that if $p$ has norm 1 then $p^-1 = \conj p$.
+\fi
+
+A quaternion $p \in \mathbb{H}$ defines a linear transformation $\Phi(p):\mathbb{H} \rightarrow \mathbb{H}$ that sends $v \mapsto p v p^{-1}$. These transformation turn out to be rotations when restricted to the unit quaternion group!
+
+Let $S\mathbb{H}$ denote the group of unit quaternions i.e. $\{ p \in \mathbb{H} : \norm{p} = 1\}$. We think of $\R^3$ as the set of \emph{purely imaginary} quaternions i.e. the vector $(x,y,z)$ represents the quaternion $xi + yj + zk$. It turns out to be the case that when $p \in S \mathbb{H}$ the transformation $v \mapsto p v p^{-1}$ preserves the set of purely imaginary quaternions. In fact a much stronger result holds.
+
+
+\begin{thm}
+	\label{thm:quaternions}
+	The map sending $p\in S\mathbb{H}$ to $\Phi(p)$ defines a homomorphism
+	\begin{align}
+		\Phi : S \mathbb{H} \rightarrow SO(3)
+	\end{align}
+	This homomorphism is surjective with kernel $\Z/2$.
+\end{thm}
+The proof of this has several steps and is in Exercises in  \ref{sec:exQuaternions}.
+
+The group $S\mathbb{H}$ shows up in several avatars in various branches of mathematics. It is the spin group in 3 dimensions, denoted $Spin(3)$. Because $SO(3)$ is the group of rotation of $\R^3$ the above theorem is asserting that there are two quaternions over each rotation of $\R^3$. In physics this fact becomes relevant because in quantum mechanics certain systems have $S\mathbb{H}$ as their symmetry groups and for such systems there are is a physical quantity, called \textbf{spin} which has two possible values for each value of the angular moment.
+
+
+
+\iffalse
+\begin{proof}
+	Suppose $\norm{p} = 1$ for some $p \in \mathbb{H}$. We need to show that for $\alpha, \beta \in \R^3$ we have $\innerp{p\alpha}{p\beta} = \innerp{\alpha}{\beta}$. We need a good way to manipulate inner products. Let $\Re(a+bi+cj+dk) = a$ denote the real part of quaternions. Then it is easy to see that $\innerp{\alpha}{\beta} = \Re(\alpha \beta)$. We're reduced to showing thatwhen $\norm{p} = 1 $ we have
+	\begin{align}
+		\label{eq:random}
+		\Re(p \alpha p ^{-1}.p \beta p ^{-1}) = \Re{(\alpha\beta)}
+	\end{align}
+
+
+	Now we invoke the notion of conjugate quaternions. Similar to complex numbers we have conjugation and norm on quaternions given by
+	\begin{align}
+		\conj{a + bi + cj + dk}   & = a - bi - cj - dk      \\
+		\norm{a + bi + cj + dk}^2 & = a^2 + b^2 + c^2 + d^2
+	\end{align}
+	and we also have the identity
+	\begin{align}
+		(a + bi + cj + dk).\conj{(a + bi + cj + dk)} = \norm{a + bi + cj + dk}^2
+	\end{align}
+	In particular note that if $p$ has norm 1 then $p^{-1} = \conj p$. Plugging this back in \eqref{eq:random} gives us the desired result.
+
+	The kernel of this homomorphism is exactly the quaternions $p$ such that for all $v$ we have
+	\begin{align}
+		p v p ^{-1} = v
+	\end{align}
+	The only such $p$'s are the purely \emph{real} quaternions i.e. the ones with no $i,j,k$ components. The only such quaternions of norm 1 are $p = \pm 1$ and so the kernel of $\Phi$ is $\Z/2$.
+\end{proof}
+\fi
+
+
+
+\newpage
+\section{Exercise}
+\begin{exercise}
+	\label{thm:exO2}
+	Consider a matrix $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix} \in O(2)$.
+	\begin{enumerate}
+		\item Show that for some $\theta$, $\phi$ we must have $a = \cos \theta$, $b = \sin \theta$, and $c = \cos \phi$, $d = \sin \phi$.
+		\item Find the relations between $\theta$ and $\phi$ and prove that every matrix in $O(2)$ is of the form \eqref{eq:O2}.
+		\item Describe the matrices in \eqref{eq:O2} geometrically and compute their eigenvalues.
+	\end{enumerate}
+\end{exercise}
+
+
+
+\iffalse
+\begin{exercise}
+	\label{thm:exO(n)}
+	What is wrong with the following proof?
+	Suppose $A \in O(n)$ and let $v$ be an eigenvector of $A$ with eigenvalue $\lambda$ then
+	\begin{alignat}{4}
+		         &   & \innerp{Av}{Av}               & = \innerp{v}{v} \\
+		\implies &   & \innerp{\lambda v}{\lambda v} & = \innerp{v}{v} \\
+		\implies &   & \lambda^2 \innerp{v}{v}       & = \innerp{v}{v} \\
+		\implies &   & \lambda^2                     & =  1
+	\end{alignat}
+	Hence every eigenvalue of $A$ is $\pm 1$.
+\end{exercise}
+\fi
+
+\begin{exercise}
+	Show that the matrices
+	\begin{align}
+		\begin{bmatrix} 1  &   &   \\ &\cos \theta & \sin \theta \\ &\sin \theta & -\cos \theta \end{bmatrix}
+		&&
+		\begin{bmatrix} -1 &   &   \\ &\cos \theta & \sin \theta \\ &\sin \theta & -\cos \theta \end{bmatrix}
+	\end{align}
+	are in $O(3)$. What do these geometrically represent? Find the matrices of type \eqref{eq:O3Type1} or \eqref{eq:O3Type2} to which these are similar.
+\end{exercise}
+
+\begin{exercise}
+	Describe the matrices in $SO(n)$ geometrically for arbitrary positive integer $n$. Do these matrices still represent rotations? What is the difference between matrices in $SO(2n)$ and matrices in $SO(2n+1)$.
+\end{exercise}
+
+\subsection{Quaternions}
+\label{sec:exQuaternions}
+The following exercises prove theorem \ref{thm:quaternions}.
+
+\begin{exercise}
+	The first step is to figure out how to deal with inner products using quaternions. Let $\Re(a + bi + cj + dk) = a$ denote the real part of quaternions.
+	\begin{enumerate}
+		\item Show that for two vectors $x, y \in \R^3$ the dot product $\innerp{x}{y}$ is equal to $-\Re(xy)$.
+		\item Show that for any quaternion $p \conj{p} = \norm{p}^2$ and hence if $p \in S\mathbb{H}$ then $p^{-1} = \conj{p}$.
+		\item Show that for $p \in S \mathbb{H}$ and $v \in \mathbb{H}$ we have $ \Re{(x)} = \Re{(p x p^{-1}) }$. This implies in particular that $\Phi(p)$ takes the purely imaginary quaternions to purely imaginary quaternions.
+		\item Show that for $p \in S \mathbb{H}$ and $x, y \in \R^3$ we have $ \innerp{x}{y} = \innerp{px\conj{p}}{px\conj{p}}$.
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	Let $p \in S \mathbb{H}$ be a unit quaternion. The above exercise proves that the transformation $\Phi(p)$ preserves the dot product.
+	\begin{enumerate}
+		\item Show that for $q \in \mathbb{H}$ we have $\Phi(pq) = \Phi(p)\Phi(q)$ and hence we have a group homomorphism $\Phi: S\mathbb{H}\rightarrow SO(3)$.
+		      (It is $SO(3)$ and not $SO(4)$ because we're looking at the transformations of the space of purely imaginary quaternions.)
+		\item Argue that because $S\mathbb{H}$ is connected the image of $\Phi$ should be a subgroup of $SO(3)$ and hence $\Phi$ is a homomorphism $S\mathbb{H} \rightarrow SO(3)$.
+		\item Show that for the unit quaternion $p = \cos (\theta/2) + \sin (\theta/2)(x i+yj+zk)$ the transformation $\Phi(p)$ fixes the vector $(x,y,z)$. Use this to argue that $\Phi$ is surjective.
+		\item Show that the center of $S\mathbb{H}$ is the set of purely real quaternions. Argue that the kernel of $\Phi$ is $\Z/2$.
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	\begin{align}
+		O_8 = \{ \pm 1, \pm i, \pm j, \pm k \}
+	\end{align}
+	Let $O_8 \subseteq \mathbb{H}$ be the finite quaternion group. Describe the image of $O_8$ under the homomorphism $\Phi$ (defined in Section \ref{sec:quaternions}).
+\end{exercise}
+
+
+
+
+
+
+
+
+
+
+\iffalse
+\begin{exercise}
+	Show that $O(n)$, $SO(n)$, $U(n)$ and $SU(n)$ are compact subsets of $M_{n \times n}(\R \mbox{ or } \C)$, but $GL_n(\R)$, $SL_n(\R)$, $GL_n(\C)$ and $SL_n(\C)$ are not.
+\end{exercise}
+
+\begin{exercise}
+	Find the center of the groups $GL_n(\R)$ and $SL_n(\C)$.
+\end{exercise}
+
+
+
+\begin{exercise}
+	A \textbf{maximal torus} of a matrix group $G$ is a maximal abelian subgroup of $G$ i.e. a subgroup $H \subseteq G$ is called a maximal torus if $H$ is abelian and if an abelian subgroup $H' \subseteq G$ contains $H$ then $H=H'$.
+
+	Find a maximal torus of each of the following groups: $U(n)$, $SU(n)$, $SO(2n)$ and $SO(2n+1)$.
+
+\end{exercise}
+\fi
+
+
+\end{document}

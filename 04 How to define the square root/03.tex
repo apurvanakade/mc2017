@@ -1,0 +1,73 @@
+
+
+
+\input{../preamble}
+\DeclareMathOperator{\re}{Re}
+
+
+
+\begin{document}
+\title{Fermat's Theorem for Polynomials}
+\author{Apurva Nakade}
+\thispagestyle{fancy}
+\maketitle
+
+
+\begin{thm}[Riemann-Hurwitz]
+	Given an $N$ sheeted branched covering map of compact Riemann surfaces $\pi:S' \rightarrow S$ we have the identity
+	\begin{align}
+		g(S') = N(g(S) - 1) + 1 + \sum \limits_{P \in S'} \dfrac{e_P - 1}{2}
+	\end{align}
+	where $g(S)$ and $g(S')$ denote the genus of $S$ and $S'$, the sum is over the ramified points $P$ and $e_P$ denotes the ramification degree of $P$.
+\end{thm}
+
+\begin{cor}
+	\label{thm:thm1}
+	If there is a branched covering $\pi: S' \rightarrow S$ of compact Riemann surfaces then $g(S') \ge g(S)$. In particular there is no branched covering $\pi: \widehat \C \rightarrow S$ unless $S = \widehat \C$.
+\end{cor}
+\begin{proof}
+	$N$ is at least 1 and the sum $\sum_{P \in S'} \dfrac{e_P - 1}{2}$ is always non-negative, the result follows.
+\end{proof}
+
+\begin{thm}
+	Every non-constant complex differentiable map between compact Riemann surfaces is a branched covering.
+\end{thm}
+
+For $d>2$ denote by $S_d$ the compactified Riemann surface defined by the equation
+\begin{align}
+	S_d = \mbox{ compacification of } \{ (z,w): z^d + w^d = 1\}
+\end{align}
+\begin{lem}
+	\label{thm:thm2}
+	Genus of $S_d$ is ${d-1 \choose 2}$, hence for $d>2$ the genus is at least 1.
+\end{lem}
+\begin{proof}
+	The projection onto the $z$ coordinate and the equation $w^d = 1 - z^d $ gives us a natural $d$ sheeted branched covering $S_d \rightarrow \widehat C$. This covering is branched exactly over the roots of unity where all the $d$ sheets ramify. Further the monodromy at each branch point is exactly $\Z/d$ and there are $d$ branch points so the point at $\infty$ is not a branch point (see Figure). Thus there are $d$ many branch points with ramification degree $d$. Plugging into the Riemann-Hurwitz formula we get
+	\begin{align}
+		g(S_d) & = d(0 - 1) + 1 + \dfrac{d(d - 1)}{2}      \\
+		       & = \dfrac{(d-1)(d-2)}{2} = {d-1 \choose 2}
+	\end{align}
+\end{proof}
+
+\begin{thm}
+	For $d>2$ are no non-constant solutions of the equation
+	\begin{align}
+		\label{eq:eq1}
+		x(t)^d + y(t)^d = z(t)^d
+	\end{align}
+	where $x(t), y(t), z(t)$ are polynomials with complex coefficients.
+\end{thm}
+\begin{proof}
+	Suppose $x(t)$, $ y(t)$, $z(t)$ are non-constant polynomials satisfying the equation \eqref{eq:eq1}. Without any loss of generality assume that $x(t)$, $ y(t)$, $z(t)$ have no common factors. We can define a complex differentiable map
+	\begin{align}
+		\pi : \widehat {\C} & \rightarrow S_d                                             \\
+		p                   & \mapsto \left(\dfrac{x(p)}{z(p)}, \dfrac{y(p)}{z(p)}\right)
+	\end{align}
+	where $p$ is either a 0 of $z(t)$ or $p = \infty$ then $p$ maps to $\lim \limits_{p \rightarrow \infty}\left(\dfrac{x(p)}{z(p)}, \dfrac{y(p)}{z(p)}\right)$. Because the Riemann surface is compact all limits exist and the above map is well defined. As it is defined using polynomials it is also complex differentiable and hence is a branched covering. Together with Lemma \ref{thm:thm2} this contradicts Corollary \ref{thm:thm1}.
+\end{proof}
+
+
+
+
+
+\end{document}

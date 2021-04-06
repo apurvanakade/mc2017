@@ -1,0 +1,201 @@
+
+\input{../preamble}
+\DeclareMathOperator{\Ce}{Re}
+
+
+
+\begin{document}
+\title{Crash Course on Representation Theory - Day 1}
+\author{Apurva Nakade}
+\thispagestyle{fancy}
+\maketitle
+
+
+
+
+All the vector spaces will be finite dimensional vector spaces over $\C$. $G$ will denote a finite group. $V$ will denote a vector space of dimension $d$ over $\C$. All representations will be finite dimensional.
+
+\section{Introduction}
+Representation theory is based on the philosophy: When life gives you groups, linearize. Groups in general have very little structure on them (only 1 product) and hence are notoriously difficult to analyze. On the other hand there are a lot ways to exploit matrices: addition, multiplication, diagonalization, eigenvalues and eigenvectors, the various canonical forms, etc. As such it is usually quite fruitful to reduce a problem in group theory to one in linear algebra.
+
+Theorems in basic representation theory can be very broadly broken into two kinds: i) structural theorems about existence and classification of representations coming from linear algebra, ii) constructive theorems which actually construct these representations using other techniques like combinatorics. In this class we'll only look at theorems of the first kind.
+
+\subsection{Frobenius determinant}
+Historically, a generalization of the following question prompted Frobenius to develop representation theory.
+For variables $x_0, x_1, \ldots, x_{n-1}$ define the Frobenius matrix to be a matrix whose $i,j^{th}$ entry is $x_{(i-j \mod n)}$ i.e. in the $j^{th}$ column $x_i$ is in the row $i+j \mod n$.
+\begin{align}
+	F_n & = \begin{bmatrix} x_0 & x_{n-1} & \cdots & x_{1} \\ x_{1} & x_0 & \cdots & x_{2} \\ \vdots&& \ddots &\vdots \\ x_{n-1} & x_{n-2} & \cdots & x_0 \end{bmatrix}
+\end{align}
+\begin{ques}
+	What are the irreducible factors of the determinant of $F_n$?
+\end{ques}
+We'll use representation theory to answer this question. For small dimensions it is a fun exercise to work out the factors by hand.
+\begin{align}
+	\det \begin{bmatrix} x_0 & x_1 \\ x_1 & x_0 \end{bmatrix} &= x_0^2 - x_1^2 = (x_0 - x_1)(x_0 + x_1) \\
+	\det \begin{bmatrix} x_0 & x_1 & x_2 \\ x_1 & x_0 & x_2 \\ x_2 & x_1 & x_0 \end{bmatrix} &= x_0^3 + x_1^3 + x_2^3 - 3 x_0 x_1 x_2
+	= \: ??
+\end{align}
+
+
+
+\section{Definitions}
+A $d$ dimensional \textbf{representation} of $G$ is a group homomorphism $$\rho: G \rightarrow GL(V)$$ where $V$ is a $d$ dimensional vector space over $\C$ and $GL(V)$ denotes the group of invertible linear transformations $V \rightarrow V$. We say that $G$ acts on $V$ or that $V$ has an action of $G$ on it, denoted $G \circlearrowright V$. It is common to abuse notation and say that $V$ is a representation of $G$. More explicitly, we assign to each element $g \in G$ a linear transformation $\rho(g)$ satisfying
+\begin{enumerate}
+	\item $\rho(e) = I_{V}$ where $e$ is the identity in $G$ and $I_V$ is the trivial linear transformation on $V$
+	\item $\rho(gh) = \rho(g)\rho(h)$
+	\item $\rho(g^{-1}) = \rho(g)^{-1}$
+\end{enumerate}
+An \textbf{equivariant} map between two representations $\rho$ and $\tau$ of $G$ is a linear map $f: V \rightarrow W$ such that the induced map $GL(f)$ fits in the following commutative diagram
+\begin{align}
+	\xymatrix{
+	                 & GL(V) \ar^{GL(f)}[d] \\
+	G \ar[ur] \ar[r] & GL(W)                \\
+	}
+\end{align}
+To be more explicit a linear map $f:V \rightarrow W$ is equivariant if for any $v \in V$ we have $f(\rho(g)(v)) = \tau(g)(f(v))$. An \textbf{isomorphism} of representations is an invertible equivariant map $f: V \rightarrow W$.
+
+
+A \textbf{sub-representation} of $V$ is a subspace $W \subsetneq V$ such that $W$ is itself a representation of $G$ i.e. for every $g \in G$, $w \in W$ we have $\rho(g)w \in W$. We say that $W$ is closed under the action of $G$. A representation of $G$ which has no sub-representation is called an \textbf{irreducible} representation. We say that a representation $V$ is \textbf{decomposable} if it there are sub-representations $V_1, V_2$ such that $V_1 \oplus V_2 \cong V$.
+
+Irreducible representations are the analogues of prime numbers in representation theory. One of the central goals of representation theory is to classify all the possible irreducible representations and to decompose arbitrary representations into irreducible ones.
+
+
+
+
+
+
+
+
+
+
+\section{Examples}
+
+\subsection{Trivial Representation}
+For any finite group $G$ and any vector space $V$ there is a \textbf{trivial} representation $\rho : G \rightarrow GL(V)$ which sends every element in $G$ to the identity transformation $I_V$.
+
+\subsection{Cyclic Groups}
+For the abelian group $\Z/n$ with generator $a$ every representation is completely determined by where $a$ is mapped. Any $n \times n$ matrix $A$ satisfying $A^n = 1$ gives a representation $\Z/n \rightarrow GL(V), a \mapsto A$. In particular for each $0 \le k < n$ the $n^{th}$ root of unity $e^{2 \pi i k/n}$ gives us a 1 dimensional representation of $\Z/n$. It is easy to see that no two of these representations are isomorphic.
+
+
+
+\subsection{Symmetric Group}
+Every symmetric group $S_n$ has an $n$ dimensional representation called the \textbf{standard representation}. $S_n$ acts on $\C^n$ as follows: If $e_1, \cdots, e_n$ is the standard basis for $\C^n$ then the permutation $g \in S_n$ acts on $\C^n$ via
+\begin{align}
+	\rho(g){e _ i} & = e_ {\sigma(i)}
+\end{align}
+The matrices of $\rho(g)$ in the standard basis are called the \textbf{permutation matrices}.
+
+The standard representation of $S_n$ is not irreducible. Consider the 1-dimensional subspace $ W$ generated by the element $e_1 + e_2 + \cdots + e_n$. This subspace is invariant under the action of $S_n$ and hence is a sub-representation of $\C^n$. Let $W^{\perp}$ be the vector space of $\C^n$ consisting of vectors which are perpendicular to $W$ i.e. $W^{\perp} = \{ c_1.e_1 + \cdots + c_n.e_n  : c_1 + \cdots + c_n = 0\}$. It is easy to see that $W^{\perp}$ is also a sub-representation of $\C^n$ and hence $V \cong W \oplus W^{\perp}$ as representations.
+
+\subsection{Sign Representation}
+Every symmetric group $S_n$ has a 1 dimensional representation $\mathrm{sign}: S_n \rightarrow GL_1(\C)$ called \textbf{sign representation} defined as follows: Every transposition $(i,j)$ maps to $-1$. Every permutation can be written (non-uniquely) as a product of transpositions and hence we can extend this map to the entire $S_n$. We can then show that this extension is well defined.
+
+
+\subsection{Dihedral group}
+Let $D_{2n}$ denote the \textbf{dihedral group} which is the group of symmetries of a regular $n$ sided polygon in $\R^2$. $D_{2n}$ has a presentation
+\begin{align}
+	D_{2n} = \langle x,y \mid x^2 = 1, y^n = 1, xyxy=1\rangle
+\end{align}
+$x$ denotes reflection about a line that passes through the center of the polygon and $y$ denotes a reflection about the center of the polygon by an angle of $2 \pi / n$. We can show that $D_{2n}$ contains exactly $2n$ elements and every element is of the form $y^d$ or $xy^d$ for some $0 \le d \le n - 1$, hence the subscript $2n$. $D_{2n}$ has a natural 2 dimensional representation
+\begin{align}
+	\rho : D_{2n} &\rightarrow GL_2(\C) \\
+	x & \mapsto \begin{bmatrix} 0               & 1                \\ -1 & 0 \end{bmatrix} \\
+	y & \mapsto \begin{bmatrix} \cos(2 \pi / n) & -\sin(2 \pi / n) \\ sin(2 \pi / n) & \cos(2 \pi / n) \end{bmatrix}
+\end{align}
+One can show that the standard 2 dimensional representation of $D_{2n}$ is irreducible.
+
+\subsection{Quaternions}
+The \textbf{quaternion group} $Q_8$ defined by the presentation
+\begin{align}
+	Q_8 = \langle i,j,k, -1 \mid i^2 = j^2 = k^2 = -1 = ijk, (-1)^2 = 1  \rangle
+\end{align}
+has a 1 dimensional \textbf{sign representation} given by mapping $i$ to 1 and $j$, $k$ to $-1$, and similarly two other sign representations. $Q_8$ also has a 2-dimensional representation $Q_8 \rightarrow GL(\C^2)$ given by
+\begin{align}
+	i \mapsto \begin{bmatrix} i & 0 \\ 0 & -i \end{bmatrix}
+	\qquad
+	j \mapsto \begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix}
+	\qquad
+	k \mapsto \begin{bmatrix} 0 & i \\ i & 0 \end{bmatrix}
+\end{align}
+
+\subsection{Regular Representation}
+Every group $G$ has a $|G|$ dimensional representation called a \textbf{regular representation}. Consider the free vector space $V$ over $G$ i.e. $V$ is a $|G|$ dimensional vector space with a basis given by $\{ e_g : g \in G\}$. $G$ acts on $V$ via
+\begin{align}
+	\rho(g)(e_h) = e_{gh}
+\end{align}
+The regular representation is not irreducible as it contains a 1 dimensional vector space spanned by $\sum _ {g \in G} e_g$ which is invariant under the action of $G$.
+
+
+
+
+
+
+
+
+
+
+
+
+\section{`Prime' representations}
+Representation theory of finite groups over $\C$ asserts the existence of finitely many irreducible representations up to isomorphism. Further these representations can be detected by their characters.
+
+Recall that two elements $g_1, g_2 \in G$ are called \textbf{conjugates} of each other if there exists an $h \in G$ such that $h^{-1} g_1 h = g_2$. Being a conjugate is an equivalence relation and the equivalence classes are called \textbf{conjugacy classes}.
+
+\begin{thm} Up to isomorphism there are finitely many irreducible representations of $G$. Suppose $\rho_1, \rho_2, \ldots, \rho_r$ are the distinct irreducible representations of $G$ with dimensions $d_1$, $d_2$, \ldots, $d_r$ respectively then,
+	$\quad$
+	\begin{enumerate}
+		\item $r$ equals the number of conjugacy classes in $G$.
+		\item $d_i \mid |G|$ where $|G|$ denotes the size of $G$.
+		\item $|G| = d_1^2 + d_2^2 + \cdots + d_r^2$
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Maschke's theorem]
+	Every reducible representation is decomposable.
+\end{thm}
+
+\begin{thm}[Schur's lemma]
+	Using the same notation as in the previous theorem, every finite dimensional representation $\tau$ of $G$ has a unique decomposition
+	\begin{align}
+		\tau \cong \rho_1^{\oplus k_1} \oplus \rho_2^{\oplus k_2} \oplus \cdots \oplus \rho_r^{\oplus k_r}
+	\end{align}
+	for some positive integers $k_1, k_2, \cdots, k_r$ where by $\rho_i \oplus \rho_j$ we mean the representation $G \xrightarrow{\rho_i \oplus \rho_j} GL(V_i \oplus V_j)$.
+\end{thm}
+In terms of matrices $(\rho_i \oplus \rho_j)(g)$ is the block matrix with two blocks given by $\rho_i(g)$ and $\rho_j(g)$ respectively. This theorem can be interpreted as saying that for every representation $\tau: G \rightarrow GL(V)$ it is possible to choose a basis for $V$ such that all the matrices $\tau(g)$ become block diagonal in this basis, further each of the blocks are obtained from the irreducible representations.
+
+These two theorems should be thought of as saying that in the world of $G$ representations there are finitely many `primes'. Every other representation can be uniquely written as a `product'(=direct sum) of these primes.
+
+\subsection{Examples}
+\begin{description}
+	\item[Dihedral group $D_6$:]
+	$D_6$ which is the same as the symmetric group $S_3$ has 3 conjugacy classes $\{ \{1 \}$, $\{ (1,2)$; $(1,3)$; $(2,3) \}$, $\{(1,2,3)$; $(1,3,2)\} \}$ and hence has 3 irreducible representations of dimensions say $d_1, d_2, d_3$ which satisfy i) $d_i | 6$ and ii) $d_1^2 + d_2^2 + d_3^2 = 6$. The only such numbers are $1,1,2$. Further we know what they are: the trivial representation, the sign representation and the standard representation of the dihedral group $D_6$.
+
+	\item[Quaternion group $Q_8$:]
+	The quaternion group $Q_8$ has 5 conjugacy classes $\{ 1\}$, $\{ -1\}$, $\{i, -i\}$, $\{ j, -j\}$, and $\{ k, -k\}$ and hence has 5 distinct irreducible representations. But we know 5 irreducible representations of $Q_8$: the trivial representation, the 3 sign representations, and the two dimensional representation.
+
+	\item[Cyclic group:]
+	Let $G$ be the cyclic group $\Z/n$. As $G$ is abelian $ghg^{-1} = h$ for all $h$ i.e. each conjugacy class contains exactly 1 element and hence the number of conjugacy classes of $G$ is $n$. So $G$ has exactly $n$ distinct irreducible representations. Suppose their dimensions are $d_1, \cdots, d_n$ then we must have $n = d_1^2 + \cdots + d_n^2$. The only possibility is $d_i = 1$ for all $i$ i.e. all the irreducible representations of $\Z/n$ are 1 dimensional. But we already know $n$ one dimensional representations of $\Z/n$ (given by the roots of unity). More generally we get
+
+	\begin{proposition}
+		Every irreducible representation of an a abelian group is 1 dimensional.
+	\end{proposition}
+
+	\item[$p^2$ groups:]
+	Let $G$ be a group of size $p^2$ where $p$ is a prime. Suppose $G$ has $r$ irreducible representations of dimensions $d_1, d_2, \cdots, d_r$ then we must have $d_i | p^2$ so each $d_i$ is in the set $\{ 1, p , p^2 \}$. We also have $p^2 = d_1 ^2 + d_2 ^2 + \cdots + d_r^2$. Every group has a trivial representation so that one of the $d_i's$ is 1. The only possibility is $d_i = 1$ for all $i$ and hence $r = p^2$. But this forces $G$ to have $p^2$ conjugacy classes and hence every conjugacy class contains exactly 1 element i.e. $G$ is abelian.
+
+	\begin{proposition}
+		Every group of size $p^2$ is abelian.
+	\end{proposition}
+
+	\item[Symmetric groups]
+	The symmetric groups $S_n$ have size $n!$. The conjugacy classes of $S_n$ are given by cycle types. One can show that the number of cycle types is equal to the number of ways of partitioning $n$ and hence for every partition of the number $n$ we get an irreducible representation of $S_n$.
+\end{description}
+
+
+
+
+
+
+
+
+\end{document}

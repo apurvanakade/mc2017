@@ -1,0 +1,105 @@
+
+\documentclass{article}
+\usepackage{amsmath, amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[all,cmtip]{xy}
+\usepackage{color}
+
+
+\setcounter{tocdepth}{4}
+
+\renewenvironment{proof}{ {\bfseries Proof:}}{\qed}
+
+\newtheoremstyle{mytheorem}%                % Name
+{}%                                     % Space above
+{}%                                     % Space below
+{\itshape}%                                     % Body font
+{0pt}%\parindent}%                                     % Indent amount
+{\bfseries}%                            % Theorem head font
+{.}%                                    % Punctuation after theorem head
+{ }%                                    % Space after theorem head, ' ', or \newline
+{}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{mytheorem}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{proposition}[thm]{Proposition}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{corollary}[thm]{Corollary}
+
+
+\newtheoremstyle{mydefinition}%                % Name
+{}%                                     % Space above
+{}%                                     % Space below
+{}%                                     % Body font
+{0pt}%\parindent}%                                     % Indent amount
+{\bfseries}%                            % Theorem head font
+{.}%                                    % Punctuation after theorem head
+{ }%                                    % Space after theorem head, ' ', or \newline
+{}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{mydefinition}
+\newtheorem{definition}[thm]{Definition}
+\newtheorem{example}[thm]{Example}
+\newtheorem{exercise}[thm]{Exercise}
+\newtheorem{remark}[thm]{Remark}
+%\newtheorem{ques}[thm]{Q.}
+\newtheorem*{ques}{Question}
+%\newtheorem{ans}[thm]{Ans.}
+\newtheorem*{ans}{Ans}
+
+
+
+\numberwithin{equation}{section}
+
+%Real numbers, complex numbers, etc.
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\renewcommand{\P}{\mathbb{P}}
+
+%How does latex not have these?
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Exists}{\exists}
+\DeclareMathOperator{\Forall}{\forall}
+
+\DeclareMathOperator*{\colim}{colim}
+\DeclareMathOperator*{\holim}{holim}
+\DeclareMathOperator*{\hocolim}{hocolim}
+
+
+%fractions and inner product
+\newcommand{\pr}[2][\:]{\frac{\partial #1}{\partial #2}}
+\newcommand{\innerp}[2]{\langle #1, #2 \rangle}
+
+\newcommand*\conj[1]{\overline{#1}}
+\newcommand*\norm[1]{\lVert #1 \rVert}
+
+\renewcommand{\figurename}{Fig.}
+\usepackage{float}
+\usepackage{wrapfig}
+
+\usepackage{enumitem}
+\setlist[enumerate]{itemsep=0mm}
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm
+}
+
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\scshape Apurva Nakade}
+%\rhead{\scshape Mathcamp 2017}
+\renewcommand*{\thepage}{\small\arabic{page}}

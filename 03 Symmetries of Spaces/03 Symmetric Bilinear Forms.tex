@@ -1,0 +1,120 @@
+\iffalse
+Noether's theorem says that continuous symmetries of physical systems gives rise to conservation laws. In this class we'll see some examples of low dimensional Lie groups and how they give rise to various phenomenon in physics like time dilation and length contraction in special relativity, spin states of electrons.
+
+Keywords: bilinear forms, signature, SO(2), SO(3), Spin, SO(1,3), Minkowski space and relativity, Noether's theorem, Lie groups.
+
+Prereqs: Linear algebra, Group theory
+Homework: Recommended
+\fi
+
+\input{../preamble}
+\usepackage{manfnt}
+
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\gl}{GL}
+\DeclareMathOperator{\sL}{SL}
+\DeclareMathOperator{\sign}{sign}
+
+
+\begin{document}
+\title{Classification of Symmetric Bilinear Forms}
+\author{Apurva Nakade}
+\thispagestyle{fancy}
+\maketitle
+
+
+We'll assume that all of our vector spaces are over $\R$. Let $V$ denote the vector space $\R^n$.
+\begin{definition}
+	A \textbf{non-degenerate symmetric bilinear form} on a vector space $V$ is a function
+	\begin{align}
+		\innerp{-}{-}: V \times V \rightarrow \R
+	\end{align}
+	satisfying the following conditions
+	\begin{enumerate}
+		\item (bilinearity) For all $x,y,z \in \R^n$ and $a \in \R$ we have $\innerp{ax+y}{z} = a\innerp{x}{z} + \innerp{y}{z}$.
+		\item (symmetry) For all $x,y\in \R^n$ we have $\innerp{x}{y} = \innerp{y}{x}$.
+		\item (non-degeneracy) For all $x \in \R^n$ there exists a vector $y \in \R^n$ such that $\innerp{x}{y} \neq 0$.
+	\end{enumerate}
+	We're going to be lazy and call a non-degenerate symmetric bilinear form an \textbf{inner product}. We say that an inner product is \textbf{positive definite} if for all non-zero vectors $v \neq 0 \in V$ we have $\innerp{v}{v} > 0$. A vector space $V$ with an inner product is called an \textbf{inner product space}. An isomorphism of two inner product spaces is a linear transformation between them which preserves the inner product structure.
+\end{definition}
+
+Inner products can be defined by matrices as well. Choose a basis $e_1, e_2, \cdots, e_n$ for $V$ and let $A$ be the matrix whose $i,j^{th}$ entry is $\innerp{e_i}{e_j}$. For vectors $x = \sum _ {i=1}^n x_i e_i$ and $y = \sum _ {i=1}^n y_i e_i$ we have
+\begin{align}
+	\innerp{x}{y}
+	  & = \innerp{\sum \limits _ {i=1}^n x_i e_i}{\sum \limits _ {i=1}^n y_i e_i} \\
+	  & = \sum \limits _ {i,j=1}^n  x_i\innerp{e_i}{e_j}y_j
+	  & \mbox{ by bilinearity }                                                   \\
+	  & = x^T A y
+\end{align}
+Symmetry of the inner product implies that the matrix $A$ is symmetric. Conversely any symmetric matrix $A$ defines a symmetric bilinear form by $\innerp{x}{y}_A = x^T A y$ where $x,y$ are the vectors written in the standard basis.
+
+\begin{proposition}
+	The inner product $\innerp{-}{-}_A$ is non-degenerate iff the matrix $A$ is invertible.
+\end{proposition}
+\begin{proof}
+	$A$ is not invertible iff there is a vector $x \in V$ such that $Ax = 0$ in which case for any other vector $y \in V$ we have $\innerp{y}{x} = y^T A x = 0$.
+\end{proof}
+
+We can now ask what inner product looks like in a different basis. Changing a basis corresponds to multiplying with an invertible matrix $S$. We have
+\begin{align}
+	\innerp{Sx}{Sy}_A
+	  & = (Sx)^T A (Sy)           \\
+	  & = x^T S^T A S y           \\
+	  & = \innerp{x}{y}_{S^T A S}
+\end{align}
+which suggests the following definition.
+
+\begin{definition}
+	We say two $n \times n$ matrices $A,B$ are \textbf{congruent}, $A \equiv B$, if there exists an invertible matrix $S$ such that $A = S^T B S$.
+\end{definition}
+If $A$ and $B$ are congruent then the inner product spaces $\R^n, \innerp{-}{-}_A$ and $\R^n, \innerp{-}{-}_B$ are isomorphic, in fact the isomorphism can be though of as a change of basis and hence in a sense two congruent matrices represent the same inner product.
+
+\begin{thm}[Sylvester's theorem]
+	\label{thm:theorem1}
+	Every symmetric invertible $n \times n$ matrix is congruent to a diagonal matrix with entries $\pm 1$. The number of positive (resp. negative) entries is equal to the number of positive (resp. negative) eigenvalues.
+	\begin{align}
+		\begin{bmatrix}
+		\pm 1 &       &        &       \\
+		      & \pm 1 &        &       \\
+		      &       & \ddots &       \\
+		      &       &        & \pm 1
+		\end{bmatrix}
+	\end{align}
+	Equivalently, for any inner product $\innerp{-}{-}$ on $V$ there exists a basis $e_1, e_2, \cdots, e_n$ such that $\innerp{e_i}{e_j} = 0$ if $i \neq j$ and $\innerp{e_i}{e_i} = \pm 1$.
+\end{thm}
+It is possible to prove this theorem directly by induction on the dimension of $V$. Instead we'll cheat and invoke the spectral theorem and provide a really short proof.
+
+\begin{proof}
+	By the Spectral theorem for symmetric matrices \footnote{	\begin{thm}[Spectral theorem for symmetric matrices]
+		For any symmetric matrix $A$ there exists a diagonal matrix $D$ with real entries and an orthogonal matrix $S$ such that
+		\begin{align}
+			A = S^{-1} D S
+		\end{align}
+		The entries of $D$ are the eigenvalues of $A$.
+		\end{thm}
+		} there exits an orthogonal matrix $S$ and a diagonal matrix $D$ with real entries such that $A = S^{-1} D S$. $S$ being orthogonal implies $S^{-1} = S^T$. As $A$ is invertible $A$ does not have 0 as an eigenvalue and hence the diagonal entries of $D$ are non-zero. If the entries of $D$ are $(d_1, \cdots, d_n)$ then we let $U$ be the diagonal matrix with entries $(\sqrt{|d_1|}, \cdots, \sqrt{|d_n|})$. The above equation simplifies to $ A = S^T U^T D' U S$ where the entries of $D'$ are $(\sign{d_1}, \cdots, \sign{d_n})$ which completes the proof.
+\end{proof}
+
+\begin{cor}
+	If a symmetric matrix $A$ is positive definite i.e. for all vectors $v \neq 0$ we have $v^T A v > 0$ then $A = P^T P $ for some matrix $P$.
+\end{cor}
+\begin{proof}
+	We can write $A = P^T D P $ for some invertible matrix $P$ and diagonal matrix $D$ with entries $d_i = \pm 1$. Let $v = P^{-1} e_i$ where $e_i$ is the $i^{th}$ entry in the basis. Because of positive definiteness $$ 0 < v^T A v = (Pv)^{-1}D(Pv) = e_i^T D e_i = d_i$$ and so $D$ is the identity matrix.
+\end{proof}
+
+
+\begin{definition}
+	For a symmetric invertible matrix $A$ let $n_+$ denote the number of positive eigenvalues and let $n_-$ denote the number of negative eigenvalues of $A$. The pair $(n_+,n_-)$ is called the \textbf{signature} of the induced inner product $\innerp{-}{-}_A$.
+\end{definition}
+
+By Sylvester's theorem any two congruent matrices have the same signature and hence signature of an inner product is well-defined and does not depend upon the choice of a basis. Signature is as fundamental to a symmetric bilinear form as eigenvalues are to linear transformations. For example the Minkowski space $\R^{1+3}$ can now be defined to be any 4 dimensional vector space with an inner product which has signature $(1,3)$. This definition is independent of the choice of a basis as is in some ways more fundamental.
+
+The diagonal matrix $D_{(n,m)}$ having $n$ many $1's$ and $m$ many $-1's$. This induces an inner product $\innerp{-}{-}_{D_{(n,m)}}$ on $\R^{n+m}$. The group of automorphisms of this inner product space is denoted by $O(n,m)$. As every inner product space is isomorphic $\R^{n+m}$ for some $(n,m)$ and the automorphism group of every inner product space is isomorphic to $O(n,m)$. This simplifies greatly the study of inner product spaces and their automorphism groups.
+
+
+
+
+
+
+
+\end{document}
